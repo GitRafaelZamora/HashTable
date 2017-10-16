@@ -43,35 +43,35 @@ int main () {
 		Hashy.chainedInsert(key, value);
 	}
 	cout << Hashy.printChainedHash();
-	Hashy.chainedSearch(Hashy.chainedHash(35), 35);
+	Hashy.chainedSearch(Hashy.chainedHash(searchVal), searchVal);
 	Hashy.reset();
 
 	//TEST 2
-	cout << "LINEAR HASHTABLE" << endl;
-	for (int i = 0; i < numValues; i++) {
-		value = file_data[i+3];
-		// cout << value << " " << endl;
-		key = Hashy.linearHash(value);
-		// cout << key << " " << endl;
-		Hashy.linearInsert(key, value);
-	}
-	cout << Hashy.printChainedHash();
-	Hashy.linearSearch(Hashy.linearHash(35), 35);
-	Hashy.reset();
+	// cout << "LINEAR HASHTABLE" << endl;
+	// for (int i = 0; i < numValues; i++) {
+	// 	value = file_data[i+3];
+	// 	// cout << value << " " << endl;
+	// 	key = Hashy.linearHash(value);
+	// 	// cout << key << " " << endl;
+	// 	Hashy.linearInsert(key, value);
+	// }
+	// cout << Hashy.printChainedHash();
+	// Hashy.linearSearch(Hashy.linearHash(35), 35);
+	// Hashy.reset();
 
 	//TEST 3 
-	for (int i = 0; i < numValues; i++) {
-		// cout << i+3;
-		value = file_data[i+3];
-		// cout << ": " << value << " " << endl;
-		key = Hashy.hash1(value);
-		// cout << "Key: " << key << " " << endl;
-		Hashy.insertDoubleHash(key, value);
-	}
-	cout << "DOUBLE HASHTABLE" << endl;
-	cout << Hashy.printChainedHash();
-	Hashy.linearSearch(Hashy.linearHash(35), 35);
-	Hashy.reset();
+	// for (int i = 0; i < numValues; i++) {
+	// 	// cout << i+3;
+	// 	value = file_data[i+3];
+	// 	// cout << ": " << value << " " << endl;
+	// 	key = Hashy.hash1(value);
+	// 	// cout << "Key: " << key << " " << endl;
+	// 	Hashy.insertDoubleHash(key, value);
+	// }
+	// cout << "DOUBLE HASHTABLE" << endl;
+	// cout << Hashy.printChainedHash();
+	// Hashy.linearSearch(Hashy.linearHash(35), 35);
+	// Hashy.reset();
 
 	
 

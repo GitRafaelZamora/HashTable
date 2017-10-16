@@ -45,31 +45,6 @@ void hashClass::reset() {
 int hashClass::chainedHash(int value) {
 	return value % this->table_size;
 }
-	
-// Inserts a given value into the HashTable.
-void hashClass::chainedInsert(int key, int value) {
-	// cout << "Start chainedHashInsert()" << endl;
-
-	// hash the value to get the which bucket it will be inserted to.
-	int bucket = key;
-
-	// Check if the bucket is empty. If it is then copy the value into the bucket.
-	if (HashTable[bucket]->key == this->EMPTY) {
-		HashTable[bucket]->key = bucket;
-		HashTable[bucket]->value = value;
-	} else { // Traverse through the bucket to find the last item. Then insert the item to the end of the list.
-		item* Pointer = HashTable[bucket];
-		item* n = new item;
-		n->key = bucket;
-		n->value = value;
-		n->next = NULL;
-		while (Pointer->next != NULL) {
-			Pointer = Pointer->next;
-		}
-		Pointer->next = n;
-	}
-	// cout << "End chainedHashInsert()" << endl;
-}
 
 // Traverses through given bucket incrementing count until it reachs the last node in the list.
 //		Returns the size of the bucket.
@@ -125,19 +100,53 @@ void hashClass::chainedSearch(int key, int searchVal) {
 	int bucket = key;
 	bool foundVal = false;
 	item* Pointer = HashTable[bucket];
+	int foundBucket;
 
 	while (Pointer != NULL) {
 		if (Pointer->value == searchVal) {
 			foundVal = true;
+			foundBucket = Pointer->key;
 		}
 		Pointer = Pointer->next;
 	}
 
 	if (foundVal) {
-		cout << "Search Successful!" << endl;
+		cout << "Search Value is in: " << foundBucket << endl;
 	} else {
 		cout << "Search Not Found." << endl;
 	}
+}
+
+// Inserts a given value into the HashTable.
+void hashClass::chainedInsert(int key, int value) {
+	// cout << "Start chainedHashInsert()" << endl;
+
+	// hash the value to get the which bucket it will be inserted to.
+	int bucket = key;
+
+	// Check if the bucket is empty. If it is then copy the value into the bucket.
+	if (HashTable[bucket]->key == this->EMPTY) {
+		HashTable[bucket]->key = bucket;
+		HashTable[bucket]->value = value;
+	} else { // Traverse through the bucket to find the last item. Then insert the item to the end of the list.
+		item* head = HashTable[bucket];
+
+		item* temp = new item;
+		temp->key = head->key;
+		temp->value = head->value;
+		temp->next = head->next;
+
+		head->key = bucket;
+		head->value = value;
+		head->next = temp;
+		
+		
+		// while (Pointer->next != NULL) {
+		// 	Pointer = Pointer->next;
+		// }
+		// Pointer->next = n;
+	}
+	// cout << "End chainedHashInsert()" << endl;
 }
 
 

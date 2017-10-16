@@ -15,7 +15,7 @@ private:
 		int key;
 		int value;
 		item* next;
-	};
+	} *head;
 	item** HashTable = NULL;
 
 public:
