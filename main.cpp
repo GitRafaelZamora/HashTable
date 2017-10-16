@@ -35,29 +35,29 @@ int main () {
 	// TEST 1
 	// Going through all the file_data and hashing them then inserting values into the HASHTABLE.
 	File outFile("output.txt", "out");
-	// cout << "CHAINED HASHTABLE" << endl;
+	cout << "CHAINED HASHTABLE" << endl;
 	
-	// for (int i = 0; i < numValues; i++) {
-	// 	value = file_data[i+3];
-	// 	key = Hashy.chainedHash(value);
-	// 	Hashy.chainedInsert(key, value);
-	// }
-	// cout << Hashy.printChainedHash();
-	// Hashy.chainedSearch(Hashy.chainedHash(35), 35);
-	// Hashy.reset();
+	for (int i = 0; i < numValues; i++) {
+		value = file_data[i+3];
+		key = Hashy.chainedHash(value);
+		Hashy.chainedInsert(key, value);
+	}
+	cout << Hashy.printChainedHash();
+	Hashy.chainedSearch(Hashy.chainedHash(35), 35);
+	Hashy.reset();
 
 	//TEST 2
-	// cout << "LINEAR HASHTABLE" << endl;
-	// for (int i = 0; i < numValues; i++) {
-	// 	value = file_data[i+3];
-	// 	// cout << value << " " << endl;
-	// 	key = Hashy.linearHash(value);
-	// 	// cout << key << " " << endl;
-	// 	Hashy.linearInsert(key, value);
-	// }
-	// cout << Hashy.printChainedHash();
-	// Hashy.linearSearch(Hashy.linearHash(35), 35);
-	// Hashy.reset();
+	cout << "LINEAR HASHTABLE" << endl;
+	for (int i = 0; i < numValues; i++) {
+		value = file_data[i+3];
+		// cout << value << " " << endl;
+		key = Hashy.linearHash(value);
+		// cout << key << " " << endl;
+		Hashy.linearInsert(key, value);
+	}
+	cout << Hashy.printChainedHash();
+	Hashy.linearSearch(Hashy.linearHash(35), 35);
+	Hashy.reset();
 
 	//TEST 3 
 	for (int i = 0; i < numValues; i++) {
