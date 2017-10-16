@@ -3,6 +3,7 @@
 #include <math.h>
 
 #include "hash.h"
+
 using namespace std;
 
 // Constructor to intilize the hashtable.
@@ -154,22 +155,23 @@ void hashClass::setAlpha(double alpha) {
 	this->alpha = alpha;
 }
 
-void hashClass::printChainedHash() {
+string hashClass::printChainedHash() {
 	string outString;
 	item* Pointer;
 	for (int i = 0; i < this->table_size; i++) {
 		Pointer = HashTable[i];
-		cout << "[" << i << "] ";
+		outString += "[" + to_string(i) + "] ";
 		while(Pointer != NULL) {
 			if (HashTable[i]->value == this->EMPTY) {
 
 			} else {
-				cout << Pointer->value << " ";
+				outString += to_string(Pointer->value) + " ";
 			}
 			Pointer = Pointer->next;
 		}
-		cout << endl;
+		outString += "\n";
 	}
+	return outString;
 }
 
 void hashClass::linearInsert(int key, int value) {
@@ -231,24 +233,25 @@ int hashClass::doubleHash(int key, int value) {
 }
 
 void hashClass::insertDoubleHash(int key, int value) {
+	// int bucket = doubleHash(key, value);
 	int bucket = key;
 	int newKEY;
-	if (key == 0) {
-		insertDoubleHash(key+1, value);
-	} else if (HashTable[bucket]->key == this->EMPTY) {
-		// cout << "Key: " << key << " Value: " << value << endl;
+	// cout << "table_size: " << this->table_size << endl;
+	if (HashTable[bucket]->key == this->EMPTY) {
+		cout << "Key: " << key << " Value: " << value << endl;
 		// cout << "Insert in Bucket: " << bucket << endl;
 		// cout << "Simple Insert" << endl;
 		HashTable[bucket]->key = bucket;
 		HashTable[bucket]->value = value;
+	} else if (key == 0) {
+		insertDoubleHash(key+1, value);
 	} else {
-		// cout << "     Double Hash Needed =)" << endl;
-		// cout << "     Key: " << key << " Value: " << value << endl;
+		// cout << "     Collision" << endl;
+		cout << "     Key: " << key << " Value: " << value << endl;
 		newKEY = doubleHash(key, value);
 		// cout << "     New Key: " << newKEY << " Value: " << value << endl;
 		insertDoubleHash(newKEY, value);
 	}
-	
 }
 
 

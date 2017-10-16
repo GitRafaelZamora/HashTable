@@ -7,13 +7,23 @@
 
 using namespace std;
 
-File::File(string filename) {
-	this->file.open(filename.c_str());
-	if (this->file) {
-	    cout << "Input File Open." << endl;
-	} else {
-		cout << "Error Opening File." << endl;
-	}
+File::File(string filename, string IO) {
+  if (IO == "in") {
+    this->file.open(filename.c_str());
+    if (this->file) {
+        cout << "Files Open." << endl;
+    } else {
+      cout << "Error Opening File." << endl;
+    }
+  } else if (IO == "out") {
+    this->file.open(filename.c_str(), fstream::out);
+    if (this->file) {
+        cout << "File Open." << endl;
+    } else {
+      cout << "Error Opening File." << endl;
+    }
+  }
+	
 }
 
 

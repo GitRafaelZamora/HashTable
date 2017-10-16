@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+
 using namespace std;
 
 class hashClass {
@@ -38,12 +39,11 @@ public:
 	int h2(int value);
 
 
-
 	int getTableSize();
 	void setAlpha(double alpha);
 	double getAlpha();
 
-	void printChainedHash();
+	string printChainedHash();
 	void reset();
 
 

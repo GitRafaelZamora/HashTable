@@ -10,7 +10,7 @@ private:
 	fstream file;
 
 public:
-	File(string filename);
+	File(string filename, string IO);
 	void openFile(string filename);
 	double* parseData(double file_data[]);
 	void printData(int n, double A[]);
