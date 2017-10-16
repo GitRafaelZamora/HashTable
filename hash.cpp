@@ -46,7 +46,7 @@ int hashClass::chainedHash(int value) {
 }
 	
 // Inserts a given value into the HashTable.
-void hashClass::insert(int key, int value) {
+void hashClass::chainedInsert(int key, int value) {
 	// cout << "Start chainedHashInsert()" << endl;
 
 	// hash the value to get the which bucket it will be inserted to.
@@ -69,8 +69,6 @@ void hashClass::insert(int key, int value) {
 	}
 	// cout << "End chainedHashInsert()" << endl;
 }
-
-
 
 // Traverses through given bucket incrementing count until it reachs the last node in the list.
 //		Returns the size of the bucket.
@@ -190,7 +188,6 @@ void hashClass::linearInsert(int key, int value) {
 			// cout << "Try to Insert: " << key << " " ;
 			linearInsert(key + 1, value);
 		}
-		
 	}
 }
 
@@ -220,11 +217,39 @@ void hashClass::linearSearch(int key, int value) {
 	}
 }
 
+int hashClass::hash1(int value) {
+	return (value % this->table_size);
+}
 
+int hashClass::h2(int value) {
+ return (1 + (value % (this->table_size - 2)));
+}
 
+int hashClass::doubleHash(int key, int value) {
+	//cout << "DBHASH:" << (h1(value) + key * h2(value)) % this->table_size << endl;
+	return ((hash1(value) + key * h2(value)) % this->table_size);
+}
 
-
-
+void hashClass::insertDoubleHash(int key, int value) {
+	int bucket = key;
+	int newKEY;
+	if (key == 0) {
+		insertDoubleHash(key+1, value);
+	} else if (HashTable[bucket]->key == this->EMPTY) {
+		// cout << "Key: " << key << " Value: " << value << endl;
+		// cout << "Insert in Bucket: " << bucket << endl;
+		// cout << "Simple Insert" << endl;
+		HashTable[bucket]->key = bucket;
+		HashTable[bucket]->value = value;
+	} else {
+		// cout << "     Double Hash Needed =)" << endl;
+		// cout << "     Key: " << key << " Value: " << value << endl;
+		newKEY = doubleHash(key, value);
+		// cout << "     New Key: " << newKEY << " Value: " << value << endl;
+		insertDoubleHash(newKEY, value);
+	}
+	
+}
 
 
 

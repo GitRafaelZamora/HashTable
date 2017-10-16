@@ -28,15 +28,17 @@ int main () {
 	hashClass Hashy(table_size);
 	Hashy.setAlpha(file_data[1]);
 
+	int key;
+	int value;
+
 	// TEST 1
 	// Going through all the file_data and hashing them then inserting values into the HASHTABLE.
 	cout << "CHAINED HASHTABLE" << endl;
-	int key;
-	int value;
+	
 	for (int i = 0; i < numValues; i++) {
 		value = file_data[i+3];
 		key = Hashy.chainedHash(value);
-		Hashy.insert(key, value);
+		Hashy.chainedInsert(key, value);
 	}
 	Hashy.printChainedHash();
 	Hashy.chainedSearch(Hashy.chainedHash(35), 35);
@@ -54,9 +56,20 @@ int main () {
 	Hashy.printChainedHash();
 	Hashy.linearSearch(Hashy.linearHash(35), 35);
 	Hashy.reset();
-	
 
-
+	//TEST 3 
+	for (int i = 0; i < numValues; i++) {
+		// cout << i+3;
+		value = file_data[i+3];
+		// cout << ": " << value << " " << endl;
+		key = Hashy.hash1(value);
+		// cout << "Key: " << key << " " << endl;
+		Hashy.insertDoubleHash(key, value);
+	}
+	cout << "DOUBLE HASHTABLE" << endl;
+	Hashy.printChainedHash();
+	Hashy.linearSearch(Hashy.linearHash(35), 35);
+	Hashy.reset();
 
 	return 0;
 }
