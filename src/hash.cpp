@@ -111,7 +111,7 @@ string hashClass::chainedSearch(int key, int searchVal) {
 	}
 
 	if (foundVal) {
-		cout << "Search Value " << searchVal << " is in bucket: " << foundBucket << endl;
+		// cout << "Search Value " << searchVal << " is in bucket: " << foundBucket << endl;
 	} else {
 		cout << "Search Not Found." << endl;
 	}

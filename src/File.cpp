@@ -13,14 +13,14 @@ File::File(string filename, string IO) {
   if (IO == "in") {
     this->file.open(filename.c_str());
     if (this->file) {
-        cout << "Files Open." << endl;
+        // cout << "Files Open." << endl;
     } else {
       cout << "Error Opening File." << endl;
     }
   } else if (IO == "out") {
     this->file.open(filename.c_str(), fstream::out);
     if (this->file) {
-        cout << "File Open." << endl;
+        // cout << "File Open." << endl;
     } else {
       cout << "Error Opening out File." << endl;
     }
@@ -57,7 +57,7 @@ double* File::parseData(double file_data[]) {
 // Closes THIS instance file.
 void File::close() {
 	this->file.close();
-	cout << "File closed..." << endl;
+	// cout << "File closed..." << endl;
 }
 
 // Print data takes an array and writes it out.

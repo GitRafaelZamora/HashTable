@@ -38,7 +38,7 @@ int main () {
 	// TEST 1
 	// Going through all the file_data and hashing them then inserting values into the HASHTABLE.
 	File chainedFile("../out/CHAINED_HASH_INSERT.txt", "out");
-	cout << "CHAINED HASHTABLE" << endl;
+	// cout << "CHAINED HASHTABLE" << endl;
 	for (int i = 0; i < numValues; i++) {
 		value = file_data[i+3];
 		key = Hashy.chainedHash(value);
@@ -50,7 +50,7 @@ int main () {
 	Hashy.reset();
 
 	//TEST 2
-	cout << "LINEAR HASHTABLE" << endl;
+	// cout << "LINEAR HASHTABLE" << endl;
 	File linearFile("../out/HASH_INSERT_LINEAR.txt", "out");
 	for (int i = 0; i < numValues; i++) {
 		value = file_data[i+3];
