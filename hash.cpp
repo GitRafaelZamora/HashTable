@@ -96,25 +96,27 @@ void hashClass::printItemsInBucket(int bucket) {
 }
 
 // Searches for the value given a key and a value.
-void hashClass::chainedSearch(int key, int searchVal) {
+string hashClass::chainedSearch(int key, int searchVal) {
 	int bucket = key;
 	bool foundVal = false;
 	item* Pointer = HashTable[bucket];
-	int foundBucket;
+	string foundBucket;
 
 	while (Pointer != NULL) {
 		if (Pointer->value == searchVal) {
 			foundVal = true;
-			foundBucket = Pointer->key;
+			foundBucket = to_string(Pointer->key);
 		}
 		Pointer = Pointer->next;
 	}
 
 	if (foundVal) {
-		cout << "Search Value is in: " << foundBucket << endl;
+		cout << "Search Value " << searchVal << " is in bucket: " << foundBucket << endl;
 	} else {
 		cout << "Search Not Found." << endl;
 	}
+	foundBucket += "\n";
+	return foundBucket;
 }
 
 // Inserts a given value into the HashTable.
@@ -207,25 +209,27 @@ int hashClass::linearHash(int value) {
 	return floor(this->table_size * (fmod((this->alpha * value), 1)));
 }
 
-void hashClass::linearSearch(int key, int value) {
+string hashClass::linearSearch(int key, int value, string outString) {
 	int bucket = key;
-	int startKey = key;
+	outString += to_string(key) + " ";
 	if (HashTable[bucket]->value == value) {
-		//Successful Search
-		cout << "Successful Search!" << endl;
+		// cout << outString;
+		// outString += to_string(bucket) + " ";
+		// return outString;
 	} else {
-		if (bucket == this->table_size - 1) {
-			// cout << "WrapAround key = 0" << endl;
+		if (key == this->table_size - 1) {
 			key = 0;
-			linearSearch(key, value);
-		} else if (startKey == key) {
-			cout << "Unsuccessful Search!" << endl;
+			// cout << outString;
+			// outString += to_string(bucket) + " ";
+			return linearSearch(key, value, outString + to_string(bucket) + " ");
 		} else {
-			// cout << "Try to Insert: " << key << " " ;
-			linearSearch(key + 1, value);
+			// cout << outString;
+			// outString += to_string(bucket) + " " ;
+			return linearSearch(key + 1, value, outString);
 		}
-		
 	}
+	// cout << outString;
+	return outString;
 }
 
 int hashClass::hash1(int value) {
@@ -236,31 +240,41 @@ int hashClass::h2(int value) {
  return (1 + (value % (this->table_size - 2)));
 }
 
-int hashClass::doubleHash(int key, int value) {
+int hashClass::doubleHash(int i, int value) {
 	//cout << "DBHASH:" << (h1(value) + key * h2(value)) % this->table_size << endl;
-	return ((hash1(value) + key * h2(value)) % this->table_size);
+	return ((hash1(value) + i * h2(value)) % this->table_size);
 }
 
-void hashClass::insertDoubleHash(int key, int value) {
+void hashClass::insertDoubleHash(int key, int value, int i) {
 	// int bucket = doubleHash(key, value);
-	int bucket = key;
+	// int bucket = key;
 	int newKEY;
 	// cout << "table_size: " << this->table_size << endl;
-	if (HashTable[bucket]->key == this->EMPTY) {
-		cout << "Key: " << key << " Value: " << value << endl;
+	if (HashTable[key]->key == this->EMPTY) {
+		// cout << "Key: " << key << " Value: " << value << endl;
 		// cout << "Insert in Bucket: " << bucket << endl;
 		// cout << "Simple Insert" << endl;
-		HashTable[bucket]->key = bucket;
-		HashTable[bucket]->value = value;
-	} else if (key == 0) {
-		insertDoubleHash(key+1, value);
+		HashTable[key]->key = key;
+		HashTable[key]->value = value;
 	} else {
 		// cout << "     Collision" << endl;
-		cout << "     Key: " << key << " Value: " << value << endl;
-		newKEY = doubleHash(key, value);
+		// cout << "     Key: " << key << " Value: " << value << endl;
+		newKEY = doubleHash(i, value);
 		// cout << "     New Key: " << newKEY << " Value: " << value << endl;
-		insertDoubleHash(newKEY, value);
+		insertDoubleHash(newKEY, value, i + 1);
 	}
+}
+
+string hashClass::doubleHashSearch(int key, int value, int i, string outString) {
+	outString += to_string(key) + " ";
+	if (HashTable[key]->value == value) {
+		// cout << key << " ";
+	} else {
+		int newKEY = doubleHash(i, value);
+		// cout << newKEY << " ";
+		return doubleHashSearch(newKEY, value, i + 1, outString);
+	}
+	return outString;
 }
 
 

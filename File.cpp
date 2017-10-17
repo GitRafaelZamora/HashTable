@@ -1,3 +1,5 @@
+
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -64,4 +66,9 @@ void File::printData(int n, double A[]) {
     cout << i << ":  " << A[i] << endl;
   }
   cout << endl;
+}
+
+
+void File::write(string inString) {
+  this->file << inString;
 }

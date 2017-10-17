@@ -1,3 +1,6 @@
+#ifndef FILE_H
+#define FILE_H
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -14,5 +17,8 @@ public:
 	void openFile(string filename);
 	double* parseData(double file_data[]);
 	void printData(int n, double A[]);
+	void write(string inString);
 	void close();
 };
+
+#endif

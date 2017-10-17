@@ -1,3 +1,6 @@
+#ifndef HASH_H
+#define HASH_H
+
 #include <iostream>
 #include <string>
 
@@ -24,17 +27,18 @@ public:
 
 	void chainedInsert(int key, int value); // A simple linear hash function returns k % p;
 	void linearInsert(int key, int value);
-	void insertDoubleHash(int key, int value);
+	void insertDoubleHash(int key, int value, int i);
+	string doubleHashSearch(int key, int value, int i, string outString);
 
 	int numberOfItemsInBucket(int bucket);
 	void printTable();
 	void printItemsInBucket(int bucket);
 
-	void chainedSearch(int key, int value);
+	string chainedSearch(int key, int value);
 	int chainedHash(int value);
 	int linearHash(int value);
-	void linearSearch(int key, int value);
-	int doubleHash(int value, int i);
+	string linearSearch(int key, int value, string outString);
+	int doubleHash(int i, int value);
 	int hash1(int value);
 	int h2(int value);
 
@@ -48,3 +52,4 @@ public:
 
 
 };
+#endif
